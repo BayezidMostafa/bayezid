@@ -59,24 +59,34 @@ const About = () => {
             </Text>
             <div className="mt-10">
               <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mt-10">
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  variants={fadeIn("up", "tween", 0.1, 0.5)}
+                <a
+                  target="_blank"
+                  href="https://drive.google.com/file/d/1q8QU8fWw6bVjFTTMZPFrbbDLfqLmDvUV/view?usp=sharing"
                 >
-                  <Button size="lg" variant="destructive">
-                    Download Resume
-                  </Button>
-                </motion.div>
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  variants={fadeIn("up", "tween", 0.3, 0.5)}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="show"
+                    variants={fadeIn("up", "tween", 0.1, 0.5)}
+                  >
+                    <Button size="lg" variant="destructive">
+                      Download Resume
+                    </Button>
+                  </motion.div>
+                </a>
+                <a
+                  target="_blank"
+                  href="https://drive.google.com/file/d/1gxnp7Fx-3SwuPBQd1gbstLDcFV1Dh8g4/view?usp=sharing"
                 >
-                  <Button size="lg" variant="destructive">
-                    Download CV
-                  </Button>
-                </motion.div>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="show"
+                    variants={fadeIn("up", "tween", 0.3, 0.5)}
+                  >
+                    <Button size="lg" variant="destructive">
+                      Download CV
+                    </Button>
+                  </motion.div>
+                </a>
               </div>
             </div>
           </motion.div>
