@@ -1,0 +1,107 @@
+[
+  {
+    "images": [
+      "/projects/Sparkling/header.png",
+      "/projects/Sparkling/our-service-page.png",
+      "/projects/Sparkling/testimonial-section.png",
+      "/projects/Sparkling/contact-us.png"
+    ],
+    "projectName": "Sparkling Insight",
+    "caseStudy": "",
+    "projectStatus": "Under Development",
+    "liveLink": "https://www.sparklingtherapybd.com/",
+    "technologies": [
+      "Next.js",
+      "Redux",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "MongoDB",
+      "Mongoose",
+      "Vercel"
+    ]
+  },
+  {
+    "images": [
+      "/projects/Edlighten/header.png",
+      "/projects/Edlighten/login.png",
+      "/projects/Edlighten/test.png",
+      "/projects/Edlighten/dashboard.png"
+    ],
+    "projectName": "Edlighten",
+    "caseStudy": "",
+    "projectStatus": "Production",
+    "liveLink": "http://www.edlighten.ai",
+    "technologies": [
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "Firestore"
+    ]
+  },
+  {
+    "images": [
+      "/projects/Fortify/header.png",
+      "/projects/Fortify/ASSESSMENT-PAGE.png",
+      "/projects/Fortify/assessment-page-2.png",
+      "/projects/Fortify/contact-us.png"
+    ],
+    "projectName": "FortifyLogic",
+    "caseStudy": "",
+    "projectStatus": "Production",
+    "liveLink": "http://www.fortifylogic.com",
+    "technologies": [
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "Firestore"
+    ]
+  },
+  {
+    "images": [
+      "/projects/Minglewise/header.png",
+      "/projects/Minglewise/feature-page.png",
+      "/projects/Minglewise/faq-page.png",
+      "/projects/Minglewise/contact-us.png"
+    ],
+    "projectName": "MingleWise",
+    "caseStudy": "",
+    "projectStatus": "Production",
+    "liveLink": "http://www.minglewise.com",
+    "technologies": [
+      "Next.js",
+      "Redux",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "Firestore"
+    ]
+  },
+  {
+    "images": [
+      "/projects/PD/header.png",
+      "/projects/PD/property-details-page.png",
+      "/projects/PD/EMI-calculator.png",
+      "/projects/PD/contact-us.png"
+    ],
+    "projectName": "Property Dictionary",
+    "caseStudy": "",
+    "projectStatus": "Under Development",
+    "liveLink": "https://pd-main-web-test.firebaseapp.com/",
+    "technologies": [
+      "Next.js",
+      "Redux",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "Firestore"
+    ]
+  }
+]

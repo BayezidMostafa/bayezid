@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --elastic-out: linear(
+      0,
+      0.2178 2.1%,
+      1.1144 8.49%,
+      1.2959 10.7%,
+      1.3463 11.81%,
+      1.3705 12.94%,
+      1.3726,
+      1.3643 14.48%,
+      1.3151 16.2%,
+      1.0317 21.81%,
+      0.941 24.01%,
+      0.8912 25.91%,
+      0.8694 27.84%,
+      0.8698 29.21%,
+      0.8824 30.71%,
+      1.0122 38.33%,
+      1.0357,
+      1.046 42.71%,
+      1.0416 45.7%,
+      0.9961 53.26%,
+      0.9839 57.54%,
+      0.9853 60.71%,
+      1.0012 68.14%,
+      1.0056 72.24%,
+      0.9981 86.66%,
+      1
+    );
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --swiper-pagination-bullet-color: black;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+    --color-cursor: 0, 0, 0;
+    --cursor-outline-shade: 0.3;
+    --cursor-size: 20px;
+    --cursor-outline-size: 25px;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --swiper-pagination-bullet-color: white;
+    --color-cursor: 255, 255, 255;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  cursor: none !important;
+  /* scroll-behavior: smooth !important; */
+}
+
+.slowMotion span,
+a,
+li {
+  transition: all 1s var(--elastic-out);
+}
+.sidebar-slow div {
+  transition: all 1s var(--elastic-out);
+}
+
+html::-webkit-scrollbar {
+  width: 0rem !important;
+}
+html::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+html::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+html {
+  scrollbar-width: none !important;
+}
+
+.custom-underline {
+  display: inline-block;
+  position: relative;
+}
+.custom-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  border-radius: 5px;
+  height: 5px;
+  bottom: -5px;
+  left: 0;
+  background: currentcolor;
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
+.custom-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.active-underline::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.project-carousel .swiper-pagination-bullet {
+  background-color: var(--swiper-pagination-bullet-color) !important;
+}
+.project-carousel .swiper-pagination-bullet-active {
+  width: 40px;
+  border-radius: 50px !important;
+}
+
+#cursor-dot,
+#cursor-dot-outline {
+  z-index: 999;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+#cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: rgba(var(--color-cursor), 1);
+}
+
+#cursor-dot-outline {
+  width: var(--cursor-outline-size);
+  height: var(--cursor-outline-size);
+  background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+}
