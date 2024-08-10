@@ -45,7 +45,7 @@ export default function RootLayout({
           <Toaster />
           <Nav />
           {children}
-          <div className="fixed bottom-10 right-10 z-10">
+          <div className="fixed bottom-3 right-0 sm:bottom-5 sm:right-2 md:bottom-10 md:right-10 z-10">
             <CTA />
           </div>
           <Footer />
