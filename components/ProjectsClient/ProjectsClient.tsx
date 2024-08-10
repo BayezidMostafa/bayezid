@@ -35,7 +35,7 @@ const listVariants = {
 
 const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects }) => {
   return (
-    <div className="py-20 md:py-24 lg:py-32">
+    <div className="py-20 md:py-24 lg:py-32 max-w-screen overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="show"
