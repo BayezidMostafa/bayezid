@@ -152,7 +152,7 @@ const Header = () => {
         </a>
         {/* Welcome text */}
       </div>
-      <motion.div
+      {/* <motion.div
         variants={sliderVariants}
         initial="initial"
         animate="animate"
@@ -161,7 +161,7 @@ const Header = () => {
         <Text className="text-8xl md:text-[180px] lg:text-[200px] xl:text-[220px] 2xl:text-[250px] font-bold opacity-5">
           Welcome!
         </Text>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };
