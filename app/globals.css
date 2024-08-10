@@ -49,6 +49,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --swiper-pagination-bullet-color: black;
+    --swiper-navigation-color: #000000;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
@@ -80,6 +81,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
     --swiper-pagination-bullet-color: white;
+    --swiper-navigation-color: #FFFFFF;
     --color-cursor: 255, 255, 255;
   }
 }
@@ -182,4 +184,8 @@ html {
   width: var(--cursor-outline-size);
   height: var(--cursor-outline-size);
   background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+}
+
+.swiper-button-prev .swiper-button-next {
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
 }
