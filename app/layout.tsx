@@ -8,6 +8,7 @@ import Nav from "@/components/common/Navbar/Nav";
 import Footer from "@/components/common/Footer/Footer";
 import Cursor from "@/components/common/Cursor/Cursor";
 import { Toaster } from "react-hot-toast";
+import CTA from "@/components/common/CTA/CTA";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
@@ -44,6 +45,9 @@ export default function RootLayout({
           <Toaster />
           <Nav />
           {children}
+          <div className="fixed bottom-10 right-10 z-10">
+            <CTA />
+          </div>
           <Footer />
           <Cursor />
         </ThemeProvider>
