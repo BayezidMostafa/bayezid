@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import CTA from "@/components/common/CTA/CTA";
 import Loader from "@/components/common/Loader/Loader";
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
@@ -48,20 +49,29 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {loading ? (
-            <Loader loading={loading} setLoading={setLoading} />
-          ) : (
-            <>
-              <Toaster />
-              <Nav />
-              {children}
-              <div className="fixed bottom-3 right-0 sm:bottom-5 sm:right-2 md:bottom-10 md:right-6 z-10">
-                <CTA />
-              </div>
-              <Footer />
-              <Cursor />
-            </>
-          )}
+          <AnimatePresence mode="wait">
+            {loading ? (
+              <motion.div
+                key="loader-transition"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.5 }}
+              >
+                <Loader loading={loading} setLoading={setLoading} />
+              </motion.div>
+            ) : (
+              <>
+                <Toaster />
+                <Nav />
+                {children}
+                <div className="fixed bottom-3 right-0 sm:bottom-5 sm:right-2 md:bottom-10 md:right-6 z-10">
+                  <CTA />
+                </div>
+                <Footer />
+                <Cursor />
+              </>
+            )}
+          </AnimatePresence>
         </ThemeProvider>
       </body>
     </html>
