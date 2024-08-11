@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ NavLinks, setIsSidebarOpen }) => {
             <Link
               onClick={() => setIsSidebarOpen(false)}
               href={link.href}
-              className="text-4xl font-semibold text-primary custom-underline"
+              className="text-xl sm:text-2xl md:text-4xl font-semibold text-primary custom-underline"
             >
               {link.label}
             </Link>
