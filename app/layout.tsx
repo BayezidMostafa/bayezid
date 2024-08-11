@@ -68,7 +68,9 @@ export default function RootLayout({
                   <CTA />
                 </div>
                 <Footer />
-                <Cursor />
+                <div className="hidden sm:block">
+                  <Cursor />
+                </div>
               </>
             )}
           </AnimatePresence>
