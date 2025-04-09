@@ -17,6 +17,8 @@ import { navVariants, sidebarVariants } from "@/lib/animation";
 import Sidebar from "../Sidebar/Sidebar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 interface NavProps {
   children?: React.ReactNode;
@@ -39,6 +41,10 @@ export const NavLinks: NavLinksI[] = [
   {
     href: "/projects",
     label: "Projects",
+  },
+  {
+    href: "/blogs",
+    label: "Blogs",
   },
   {
     href: "/contact",
@@ -83,7 +89,7 @@ const SideButton: React.FC<SideButtonProps> = ({
           y.set(0);
         }}
         whileTap={{ scale: 1 }}
-        className={`fixed right-5 top-5 z-50 bg-secondary rounded-full p-4 cursor-pointer shadow-md`}
+        className={`fixed right-5 top-5 z-50 backdrop-blur-sm border-2 rounded-full p-3 cursor-pointer shadow-md`}
         whileHover={{ scale: 1.1 }}
         drag
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
@@ -100,12 +106,67 @@ const SideButton: React.FC<SideButtonProps> = ({
     </div>
   );
 };
+const MenuLogo: React.FC<SideButtonProps> = ({}) => {
+  const { theme } = useTheme();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const setTransform = (event: MouseEvent, item: EventTarget & HTMLElement) => {
+    const bounds = item.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const deltaX = event.clientX - centerX;
+    const deltaY = event.clientY - centerY;
+    // Adjust the divisor here to increase or decrease the magnetic area
+    const divisor = 1; // Decrease this value to increase the magnetic effect area
+    x.set(deltaX / divisor);
+    y.set(deltaY / divisor);
+  };
+
+  return (
+    <div className="sidebar-slow">
+      <motion.div
+        style={{ x, y, userSelect: "none" }}
+        onPointerMove={(e) =>
+          setTransform(e as unknown as MouseEvent, e.currentTarget)
+        }
+        onPointerLeave={() => {
+          x.set(0);
+          y.set(0);
+        }}
+        whileTap={{ scale: 1 }}
+        className={`fixed left-5 top-5 z-50 border-2 rounded-xl p-3 cursor-pointer shadow-md backdrop-blur-sm`}
+        whileHover={{ scale: 1.1 }}
+        drag
+        dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        dragElastic={0.3}
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, y: "-100%" }}
+        transition={{
+          duration: 0.5,
+        }}
+      >
+        <Image
+          src={theme === "dark" ? "/white.png" : "/black.png"}
+          height={60}
+          width={100}
+          alt="bayezid_mostafa"
+          className="h-10 w-auto"
+        />
+      </motion.div>
+    </div>
+  );
+};
 
 const Nav: React.FC<NavProps> = () => {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { scrollY } = useScrollPosition();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { theme } = useTheme();
+
   useEffect(() => {
     if (scrollY > 250 && isVisible) {
       setIsVisible(false);
@@ -113,6 +174,15 @@ const Nav: React.FC<NavProps> = () => {
       setIsVisible(true);
     }
   }, [scrollY, isVisible]);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    handleResize(); // set initial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleBodyScroll = (shouldScroll: boolean) => {
     if (shouldScroll) {
@@ -162,19 +232,28 @@ const Nav: React.FC<NavProps> = () => {
   return (
     <main>
       <motion.nav
-        className={`max-w-7xl mx-auto fixed right-0 left-0 z-30`}
+        className={`max-w-[1320px] px-2 mx-auto fixed right-0 left-0 z-30 bg-primary/5 backdrop-blur-sm rounded-xl mt-3 ${
+          isSmallScreen && "hidden"
+        }`}
         animate={isVisible ? "visible" : "hidden"}
         initial="hidden"
         variants={navVariants}
       >
-        <section className="py-5 px-3 flex items-center justify-between relative slowMotion">
+        <section className="py-2 px-3 flex items-center justify-between relative slowMotion">
           <div>
-            <Text className="hidden md:block" variant="heading" as="h1">
+            <Image
+              src={theme === "dark" ? "/white.png" : "/black.png"}
+              height={60}
+              width={100}
+              alt="bayezid_mostafa"
+              className="h-8 sm:h-10 w-auto"
+            />
+            {/* <Text className="hidden md:block" variant="heading" as="h1">
               <Link href="/">Bayezid Mostafa</Link>
             </Text>
             <Text className="block md:hidden" variant="heading" as="h1">
               <Link href="/">BM</Link>
-            </Text>
+            </Text> */}
           </div>
           <ul className="flex items-center gap-4 sm:gap-8">
             {NavLinks?.map((l, i) => {
@@ -224,11 +303,14 @@ const Nav: React.FC<NavProps> = () => {
       </motion.nav>
       {/* Side button */}
       <AnimatePresence>
-        {!isVisible && (
-          <SideButton
-            isSidebarOpen={isSidebarOpen}
-            setIsSidebarOpen={setIsSidebarOpen}
-          />
+        {(isSmallScreen || !isVisible) && (
+          <div>
+            <MenuLogo />
+            <SideButton
+              isSidebarOpen={isSidebarOpen}
+              setIsSidebarOpen={setIsSidebarOpen}
+            />
+          </div>
         )}
       </AnimatePresence>
       <AnimatePresence>
