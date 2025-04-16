@@ -106,7 +106,7 @@ const SideButton: React.FC<SideButtonProps> = ({
     </div>
   );
 };
-const MenuLogo: React.FC<SideButtonProps> = ({}) => {
+const MenuLogo = ({ themeLoaded }: { themeLoaded: boolean }) => {
   const { theme } = useTheme();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -147,13 +147,15 @@ const MenuLogo: React.FC<SideButtonProps> = ({}) => {
           duration: 0.5,
         }}
       >
-        <Image
-          src={theme === "dark" ? "/white.png" : "/black.png"}
-          height={60}
-          width={100}
-          alt="bayezid_mostafa"
-          className="h-10 w-auto"
-        />
+        {themeLoaded && (
+          <Image
+            src={theme && theme === "dark" ? "/white.png" : "/black.png"}
+            height={60}
+            width={100}
+            alt="bayezid_mostafa"
+            className="h-10 w-auto"
+          />
+        )}
       </motion.div>
     </div>
   );
@@ -165,7 +167,16 @@ const Nav: React.FC<NavProps> = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { scrollY } = useScrollPosition();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [themeLoaded, setThemeLoaded] = useState(false);
   const { theme } = useTheme();
+
+  console.log(themeLoaded, theme);
+
+  useEffect(() => {
+    if (theme) {
+      setThemeLoaded(true);
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (scrollY > 250 && isVisible) {
@@ -226,7 +237,6 @@ const Nav: React.FC<NavProps> = () => {
     const yRange = mapRange(0, bounds.height, -1, 1)(relativeY);
     x.set(xRange * 15);
     y.set(yRange * 15);
-    console.log(xRange);
   };
 
   return (
@@ -277,7 +287,7 @@ const Nav: React.FC<NavProps> = () => {
                   <MotionLink
                     href={l?.href}
                     className={cn(
-                      "sm:text-lg font-semibold custom-underline relative transition-all duration-500 ease-out rounded-md",
+                      "sm:text-lg font-semibold custom-underline relative transition-all duration-500 ease-out rounded-md bottom-1",
                       pathname === l?.href ? "" : ""
                     )}
                   >
@@ -291,7 +301,7 @@ const Nav: React.FC<NavProps> = () => {
                       <motion.div
                         transition={{ type: "spring" }}
                         layoutId="underline"
-                        className="absolute w-full h-[5px] rounded-md left-0 -bottom-[5px] bg-secondary"
+                        className="absolute w-full h-[5px] rounded-md left-0 -bottom-[5px] bg-primary"
                       ></motion.div>
                     ) : null}
                   </MotionLink>
@@ -305,7 +315,7 @@ const Nav: React.FC<NavProps> = () => {
       <AnimatePresence>
         {(isSmallScreen || !isVisible) && (
           <div>
-            <MenuLogo />
+            <MenuLogo themeLoaded={themeLoaded} />
             <SideButton
               isSidebarOpen={isSidebarOpen}
               setIsSidebarOpen={setIsSidebarOpen}
