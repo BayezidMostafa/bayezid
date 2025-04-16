@@ -34,3 +34,10 @@ export interface Project {
   liveLink: string;
   technologies: string[];
 }
+
+export interface BlogDetails{
+  slug: string;
+  title: string;
+  content: any;
+  titleImage: any;
+}
